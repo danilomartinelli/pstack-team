@@ -23,7 +23,7 @@ O pstack, o cursor-team-kit, o Impeccable e as skills de Matt Pocock não são r
 
 ## Como usar
 
-1. **Clone o repositório** e leia `PLANO.md`. Ele explica o desenho antes de qualquer comando.
+1. **Clone** [danilomartinelli/pstack-team](https://github.com/danilomartinelli/pstack-team) e leia `PLANO.md`. Ele explica o desenho antes de qualquer comando.
 2. **Instale o pstack** da fonte original ([cursor/plugins](https://github.com/cursor/plugins/tree/main/pstack)) na biblioteca de skills do seu ambiente de agentes. Ele é a base de Plan, Design, Build e Test.
 3. **Instale o cursor-team-kit** da fonte original ([cursor/plugins](https://github.com/cursor/plugins/tree/main/cursor-team-kit)). Ele cobre limpeza de diff, CI, PR e revisão estrutural.
 4. **Instale o Impeccable** da fonte original ([pbakaus/impeccable](https://github.com/pbakaus/impeccable)): o roteador `impeccable` e as skills `impeccable-plan`, `impeccable-steer`, `impeccable-finish`, `impeccable-live`, `impeccable-review` e `impeccable-detect`.
@@ -46,7 +46,7 @@ Copie o bloco abaixo para o agente **Gerente** do seu OpenBot. Ele precisa de ac
 ```text
 Você é o agente Gerente de um OpenBot. Instale o time descrito neste repositório no painel, sem apagar nada que já exista.
 
-Repositório: https://github.com/dluan/pstack-team
+Repositório: https://github.com/danilomartinelli/pstack-team
 Se você não tiver o repositório local, clone ou leia os arquivos por essa URL.
 
 Antes de criar qualquer coisa:
