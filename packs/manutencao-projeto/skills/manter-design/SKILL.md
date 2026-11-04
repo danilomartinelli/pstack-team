@@ -5,14 +5,19 @@ description: Mantém o design system verdadeiro — tokens, componentes base, es
 
 # Manter design
 
-Documento alvo: `docs/DESIGN.md`. Se o projeto tiver um arquivo de tokens, ele continua sendo a fonte; o documento aponta para lá.
+Documento alvo: `DESIGN.md` na raiz do repo. É o arquivo que `impeccable-plan` (`document`) escreve e que a skill `impeccable` lê, junto com `PRODUCT.md` na mesma raiz. Se o projeto tiver um arquivo de tokens, ele continua sendo a fonte dos valores; `DESIGN.md` aponta para lá. Não crie um segundo design doc, inclusive `docs/DESIGN.md`.
+
+`PRODUCT.md` é contexto de produto da superfície, também na raiz, escrito por `impeccable-plan` (`init`). Não copie regra de domínio para cá. Isso é `manter-produto`, no `docs/PRODUTO.md`. Os dois arquivos não se copiam.
 
 ## O que o DESIGN.md precisa ter
 
 1. Tokens reais: cor, espaçamento, raio, tipografia, com os valores que estão no código.
 2. Componentes base: nome, caminho, variantes, estados (`hover`, `focus`, `disabled`, `loading`, `empty`, `error`).
 3. Padrões de layout: largura de conteúdo, breakpoints, comportamento mobile.
-4. O que é proibido: cor solta no componente, `!important`, estilo inline para layout.
+4. O modo das superfícies que o projeto distingue: Persuade, Operate, Read ou Experience. Um produto pode ter mais de um.
+5. O que é proibido: cor solta no componente, `!important`, estilo inline para layout.
+
+Achado de `impeccable-detect` não entra como token. Ou o valor está no código, ou é `DIVERGE`.
 
 ## Verificação
 

@@ -9,11 +9,16 @@ O time é organizado por etapa, não por cargo. Cada etapa tem um artefato e um 
 | Plan | how → why, quando o risco pede | `how`, `why` | pstack |
 | Plan | figure-it-out → show-me-your-work | `figure-it-out`, `show-me-your-work` | pstack |
 | Design | architect → arena → interrogate | `architect`, `arena`, `interrogate` | pstack |
+| Plan | seam que só o usuário escolhe | `grilling` | mattpocock |
+| Superfície | UI no Build, metade frontend | `impeccable` e, conforme o pedido, `impeccable-plan`, `impeccable-steer`, `impeccable-finish`, `impeccable-live` | impeccable |
+| Produto | termo ou regra que o repo não responde | `grill-with-docs` (`grilling`, `domain-modeling`) | mattpocock |
+| Build | implementação, em todo repo deste time | `implement` no seam do plano; vocabulário de `codebase-design` | mattpocock |
 | Build | tdd → typescript-best-practices | `tdd`, `typescript-best-practices` | pstack |
 | Build | deslop → no-comments | `deslop`, `no-comments` | cursor-team-kit |
 | Test | create-verification-skill → swarm | `create-verification-skill`, `swarm` | pstack |
 | Test | blast-radius e benchmark-checklist | `blast-radius`, `benchmark-checklist` | pstack |
 | Test | interrogate e thermo-nuclear | `interrogate`, `thermo-nuclear-code-quality-review` | pstack / cursor-team-kit |
+| Test | revisão visual, só leitura | `impeccable-review`, `impeccable-detect` | impeccable |
 | Deploy | PR, CI, conflito e review | `make-pr-easy-to-review`, `fix-ci`, `loop-on-ci`, `get-pr-comments`, `fix-merge-conflicts` | cursor-team-kit |
 | Deploy | babysit | playbook do `poteto-mode` | pstack |
 | Maintain | contexto, produto, testes, navegação, design | `manutencao-projeto` (5 skills) | este repo |
@@ -51,10 +56,10 @@ O Entregador abre o PR depois do PASS, sem pedir permissão. O veredito do diff 
 | Skill | Documento | Gatilho |
 | --- | --- | --- |
 | `manter-contexto` | `AGENTS.md`: stack, comandos, arquitetura, limites | pasta ou comando muda |
-| `manter-produto` | regras de produto e ADRs | decisão de produto tomada |
+| `manter-produto` | regras de produto, glossário e ADRs | decisão de produto ou termo resolvido |
 | `manter-testes` | pirâmide, como rodar, cobertura e lacunas | suíte muda |
 | `manter-navegacao` | telas, rotas e jornadas | rota ou tela muda |
-| `manter-design` | design system, tokens, componentes | componente ou token muda |
+| `manter-design` | `DESIGN.md` na raiz: tokens, componentes, modo | componente ou token muda |
 
 Contrato comum: só atualiza o que mudou, cita `arquivo:linha`, carimba data e commit, e falha alto quando o documento contradiz o código.
 

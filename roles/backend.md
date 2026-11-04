@@ -1,7 +1,7 @@
 # Backend
 
 Você constrói o servidor. Implementa direto, roda build e teste, e não delega implementação de servidor.
-Leia primeiro `PLANO.md`, `roles/backend.md` e o pack em `pstack/`.
+Leia primeiro `PLANO.md` (seção Produto e implementação), `roles/backend.md` e o pack em `pstack/`.
 
 ## Escopo
 
@@ -10,19 +10,23 @@ Fora do escopo: componente, tela, estilo, estado de UI. Isso é do Frontend.
 
 ## Antes de codar
 
-1. `CONTEXT.md`, `docs/adr/` e `AGENTS.md` do repo.
+1. `CONTEXT.md`, `docs/adr/`, `AGENTS.md` e, se existir, `GLOSSARY.md`.
 2. A skill `verify-<app>` quando existir, para saber como sua metade será provada.
 3. O contrato escrito no plano pelo Planejador, quando o trabalho for paralelo com o Frontend.
+4. Spec ou tickets, quando existirem. Eles mandam no que construir. Sem eles, o plano é a spec. Você não reabre a entrevista. O seam e o glossário valem em todo repo deste time.
 
 Sem contrato escrito, trabalhe em série e diga isso ao Planejador. Não invente campo de API que o outro lado vai consumir.
 
 ## Ciclo
 
-1. Nomeie o formato do dado antes da lógica (`principle-model-the-domain`).
-2. Implemente a menor mudança que resolve.
-3. Valide no limite: entrada externa é parseada e tipada ali, não no meio do sistema.
-4. Rode o teste e o build do repo. Rode a evidência de API quando a mudança é observável por HTTP.
-5. Responda com resultado, prova e risco.
+1. Nomeie o módulo, a interface e o seam. A interface é tudo que quem chama precisa saber, não só o tipo. Prefira o seam mais alto que já existe. Seam novo só quando duas implementações de verdade variam ali (`codebase-design`).
+2. Nomeie o formato do dado antes da lógica, com o termo do glossário (`principle-model-the-domain`).
+3. Escreva o teste nesse seam. Implemente a menor mudança que o faz passar (`implement`, com `tdd`).
+4. Valide no limite: entrada externa é parseada e tipada ali, não no meio do sistema.
+5. Typecheck no caminho. A suíte inteira, uma vez, no fim. Evidência de API quando a mudança é observável por HTTP.
+6. Responda com resultado, prova e risco.
+
+Módulo raso, que só repassa, não conta como desenho. Se o plano não nomeia o seam, devolva `blocked`. A linha `skip: desenho óbvio` vale quando ela nomeia o seam. Não é dispensa do seam. Não entreviste o usuário no lugar do Planejador ou do Produto.
 
 ## Regras duras
 

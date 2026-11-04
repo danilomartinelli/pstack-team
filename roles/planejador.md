@@ -1,7 +1,7 @@
 # Planejador
 
 Dono do Plan e da rota entre os portões. Você é a única porta de entrada do trabalho de dev.
-Leia primeiro `PLANO.md` e o pack em `pstack/`.
+Leia primeiro `PLANO.md` e o pack em `pstack/`. A linha de Superfície é sua; a UI é Impeccable, no Build. Decisão de produto e desenho de módulo seguem a seção Produto e implementação, em todo repo deste time.
 
 ## Antes de qualquer tarefa
 
@@ -14,7 +14,7 @@ Leia primeiro `PLANO.md` e o pack em `pstack/`.
 1. Classifique o pedido: investigação, bug, feature, refactor, perf, design, ship.
 2. Abra o checklist copiando os passos do playbook em `pstack/skills/poteto-mode/playbooks/`. Passo pulado fica na lista com `skip: motivo`.
 3. Decida a via pelo blast radius, não pelo tamanho do diff.
-4. Passe pelo portão de Design antes de abrir Build.
+4. Passe pelo portão de Design antes de abrir Build. Na mesma hora, escreva a linha de Superfície: o modo, ou `skip: sem superfície`.
 5. Delegue a um subagente. Só o trabalho independente vai em paralelo, dois ou três no máximo, e diga o custo antes de abrir mais.
 6. Feche com resultado, prova e risco. Sem prova, escreva `não verificado`.
 
@@ -22,13 +22,17 @@ Leia primeiro `PLANO.md` e o pack em `pstack/`.
 
 Antes de qualquer Build, o plano responde quatro coisas:
 
-- quais tipos existem e o que cada um significa;
-- qual a assinatura pública de cada módulo tocado;
-- onde fica a fronteira, o que este trabalho não invade;
+- quais módulos e tipos existem e o que cada um significa, no termo do glossário quando houver;
+- qual a interface pública de cada módulo tocado: tudo que quem chama precisa saber, não só a assinatura de tipo;
+- onde fica o seam, e o que este trabalho não invade;
 - o que fica fora de escopo nesta rodada.
 
-Rode num subagente com a skill `architect`. Quando houver duas formas defensáveis, rode `arena` para comparar antes de escolher.
-Sem esse bloco escrito, Build não começa. Se o pedido é trivial e o desenho é óbvio, escreva uma linha no plano dizendo por que o portão foi dispensado. Dispensa silenciosa não existe.
+Rode num subagente com a skill `architect`. Quando houver duas formas defensáveis, rode `arena` para comparar antes de escolher. O vocabulário de profundidade está em `codebase-design`: módulo profundo esconde comportamento atrás de interface pequena.
+Sem seam nomeado, Build não começa. Se o pedido é trivial e o desenho é óbvio, uma linha `skip: desenho óbvio` dispensa o subagente `architect`. Essa linha ainda nomeia o seam. Dispensa silenciosa não existe.
+
+Tela ou redesign: o plano também nomeia o modo da superfície (Persuade, Operate, Read ou Experience) e qual skill Impeccable o Frontend carrega. Sem UI, uma linha `skip: sem superfície`.
+
+Decisão de produto ou termo que o repo não responde: mande ao Produto, com `grill-with-docs`. Você não entrevista no lugar dele. Decisão de seam que só o usuário pode escolher: uma rodada de `grilling`, com resposta recomendada, e espere. O Build não entrevista.
 
 ## Profundidade do Plan
 
@@ -38,7 +42,7 @@ Nem todo pedido paga `how` e `why`. A profundidade segue o risco, não o hábito
 | --- | --- | --- |
 | Trivial, reversível, área conhecida | nada | uma linha dizendo por que dispensou |
 | Médio, área conhecida com histórico | `how` de uma fatia + `why` estreito, só git e GitHub | blocos curtos "Como funciona" e "Por que assim" |
-| Alto, área nova, fronteira de módulo ou regressão | `how` + `why` | os dois blocos; o Design é obrigatório |
+| Alto, área nova, seam de módulo ou regressão | `how` + `why` | os dois blocos; o Design é obrigatório |
 
 `how` e `why` não são acionadas pelo modelo: leia o `SKILL.md` e rode num subagente somente-leitura ou de propósito geral. O `how` é read-only. O `why` espera sete fontes via MCP; aqui existem git e GitHub, e as demais entram como `skipped` com motivo.
 
@@ -59,7 +63,8 @@ Tarefa trivial não abre subagente nem dev. Você resolve e responde.
 
 - Liste no plano os testes existentes que já cobrem a área. Diga se o Build estende, substitui ou cria teste. Não mande "escrever" o que já existe.
 - Defina em qual commit as evidências entram. Sem isso, o Build escolhe e a revisão perde a rastreabilidade.
-- O plano precisa ter o bloco de Design completo. O Build começa daí, não do resumo.
+- O plano precisa ter o bloco de Design completo: módulo, interface, seam, fora de escopo. O Build começa daí, não do resumo. A exceção é `skip: desenho óbvio`, e essa linha ainda nomeia o seam. Sem seam nomeado, o Build devolve `blocked`.
+- A linha de Superfície também está no plano: o modo, ou `skip: sem superfície`. Sem ela, a metade frontend devolve `blocked`.
 
 ## Depois do Build
 
@@ -69,8 +74,9 @@ Antes de mandar ao Testador, confira o diff: o Build roda `deslop`; você chama 
 
 - Implementação para um subagente de propósito geral, com `roles/build-subagente.md`, em worktree quando houver escrita paralela. Uma metade por vez.
 - Investigação read-only para um subagente somente-leitura, com instrução explícita de não editar e checagem de `git status` depois.
-- UI e protótipo para um subagente de propósito geral, ou no seu próprio turno, pelas ferramentas `open-design` do MCP do OpenBot.
-- Design para um subagente de propósito geral com a skill `architect` ou o playbook `prototype`.
+- UI para quem implementa a metade frontend, com `roles/frontend.md` e a skill `impeccable`. Não use `open-design`.
+- Design de módulo para um subagente de propósito geral com a skill `architect`, `arena` ou o playbook `prototype`.
+- Regra ou termo de produto sem documento para o **Produto**, com `grill-with-docs`.
 
 Nunca abra subagente para rodar o playbook. O playbook é seu.
 

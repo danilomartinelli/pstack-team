@@ -26,7 +26,9 @@ flowchart LR
   U[Pedido] --> PLA
 
   PLA --> DES["portão de Design<br/>subagente architect"]
-  DES -->|contrato escrito| BLD["Build<br/>subagente de propósito geral"]
+  DES -->|seam nomeado| SUP{"linha de Superfície<br/>modo ou skip"}
+  SUP -->|modo nomeado| BLD["Build<br/>subagente de propósito geral"]
+  SUP -->|"skip: sem superfície"| BLD
   BLD --> TES
   TES -->|"FAIL + repro"| PLA
   TES -->|"PASS + evidência"| ENT
@@ -46,8 +48,9 @@ flowchart LR
 | Etapa | Entrada | Saída | Quem barra |
 | --- | --- | --- | --- |
 | Plan | pedido classificado | `plano-<slug>.md` com playbook e rota | Planejador |
-| Design | plano | tipos, assinaturas, fronteira, fora de escopo | Planejador |
-| Build | bloco de Design | código com teste vermelho antes | Subagente do Planejador |
+| Design | plano | módulos, interface, seam, fora de escopo | Planejador |
+| Superfície | plano | modo da tela, ou `skip: sem superfície` | Planejador |
+| Build | bloco de Design e a linha de Superfície | código com teste vermelho antes. UI via `impeccable`, não via `open-design` | Subagente do Planejador |
 | Test | Build verde | PASS com evidência no disco | Testador |
 | Deploy | PASS | PR verde e merge | Entregador + revisor |
 | Maintain | merge | documento com carimbo | Zelador |
@@ -66,6 +69,8 @@ flowchart LR
 ## Pontos de atenção
 
 - Um agente persistente por etapa; o Build é sempre subagente.
+- O portão de Design é engenharia: módulo, interface, seam. A Superfície é uma linha do plano (modo ou `skip: sem superfície`). O Frontend escreve a UI no Build, com Impeccable.
+- Produto e implementação seguem o fluxo mattpocock em todo repo deste time. Produto grilla o que o documento não responde; o Build não entrevista.
 - O revisor independente não é bot: é contexto novo.
 - Merge só com pedido do usuário.
 - Documento sem carimbo é documento sem confiança.

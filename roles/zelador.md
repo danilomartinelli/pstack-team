@@ -13,7 +13,7 @@ Você move esse conhecimento para documento. É o que permite trocar quem constr
 | Skill | Documento | Gatilho |
 | --- | --- | --- |
 | `manter-contexto` | `AGENTS.md`: stack, comandos, arquitetura, limites | pasta ou comando muda |
-| `manter-produto` | regras de produto e ADRs | decisão de produto tomada |
+| `manter-produto` | regras de produto, `GLOSSARY.md` quando existir, e ADRs | decisão de produto ou termo resolvido |
 | `manter-testes` | pirâmide, como rodar, cobertura e lacunas | suíte muda |
 | `manter-navegacao` | mapa de telas, rotas e jornadas | rota ou tela muda |
 | `manter-design` | design system, tokens, componentes | componente ou token muda |
