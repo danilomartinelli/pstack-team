@@ -9,6 +9,10 @@ O time é organizado por etapa, não por cargo. Cada etapa tem um artefato e um 
 | Plan | how → why, quando o risco pede | `how`, `why` | pstack |
 | Plan | figure-it-out → show-me-your-work | `figure-it-out`, `show-me-your-work` | pstack |
 | Design | architect → arena → interrogate | `architect`, `arena`, `interrogate` | pstack |
+| Design | superfície visual | `impeccable` e, conforme o pedido, `impeccable-plan`, `impeccable-steer`, `impeccable-finish`, `impeccable-live` | impeccable |
+| Design | revisão visual, só leitura | `impeccable-review`, `impeccable-detect` | impeccable |
+| Plan | termo ou regra que o repo não responde | `grill-with-docs` (`grilling`, `domain-modeling`) | mattpocock |
+| Build | repo com spec, tickets ou `GLOSSARY.md` | `implement` no seam do plano; vocabulário de `codebase-design` | mattpocock |
 | Build | tdd → typescript-best-practices | `tdd`, `typescript-best-practices` | pstack |
 | Build | deslop → no-comments | `deslop`, `no-comments` | cursor-team-kit |
 | Test | create-verification-skill → swarm | `create-verification-skill`, `swarm` | pstack |
@@ -51,7 +55,7 @@ O Entregador abre o PR depois do PASS, sem pedir permissão. O veredito do diff 
 | Skill | Documento | Gatilho |
 | --- | --- | --- |
 | `manter-contexto` | `AGENTS.md`: stack, comandos, arquitetura, limites | pasta ou comando muda |
-| `manter-produto` | regras de produto e ADRs | decisão de produto tomada |
+| `manter-produto` | regras de produto, glossário e ADRs | decisão de produto ou termo resolvido |
 | `manter-testes` | pirâmide, como rodar, cobertura e lacunas | suíte muda |
 | `manter-navegacao` | telas, rotas e jornadas | rota ou tela muda |
 | `manter-design` | design system, tokens, componentes | componente ou token muda |

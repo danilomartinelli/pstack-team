@@ -12,7 +12,7 @@ A etapa Maintain não tem skill no pack original. Estas cinco existem para que o
 | Skill | Documento padrão | Cobre |
 | --- | --- | --- |
 | `manter-contexto` | `AGENTS.md` | stack, comandos, layout, limites, armadilhas |
-| `manter-produto` | `docs/PRODUTO.md` + `docs/adr/` | o que o produto é, regras, decisões e porquê |
+| `manter-produto` | `docs/PRODUTO.md` + `docs/adr/` + `GLOSSARY.md` quando o repo tiver | o que o produto é, regras, vocabulário e porquê |
 | `manter-testes` | `docs/TESTES.md` | comando, camadas, contagem, lacunas |
 | `manter-navegacao` | `docs/NAVEGACAO.md` | telas, rotas, jornadas, estados |
 | `manter-design` | `docs/DESIGN.md` | tokens, componentes, padrões visuais |

@@ -5,7 +5,7 @@ description: Mantém o registro do produto verdadeiro — o que ele é, para que
 
 # Manter produto
 
-Documento alvo: `docs/PRODUTO.md` para o estado atual, `docs/adr/` para decisões datadas.
+Documento alvo: `docs/PRODUTO.md` para o estado atual, `docs/adr/` para decisões datadas. Se o repo tiver `GLOSSARY.md`, ou um `GLOSSARY-MAP.md` apontando glossários por contexto, esse arquivo é o vocabulário. Glossário não tem implementação, não é spec e não é backlog.
 
 ## Regra de ouro
 
@@ -17,6 +17,7 @@ Documento alvo: `docs/PRODUTO.md` para o estado atual, `docs/adr/` para decisõe
 2. As regras de domínio que o código não pode violar, cada uma com `arquivo:linha` de onde ela vive.
 3. O que está fora de escopo, com a mesma clareza.
 4. Índice de ADRs: número, título, estado (`vigente` ou `substituído por NNNN`).
+5. Quando existir `GLOSSARY.md`: os termos que o código e o `PRODUTO.md` usam, cada um com o sentido canônico. Termo do documento que briga com o glossário é `DIVERGE`. Quem resolve o termo é o Produto, não você.
 
 ## Verificação
 

@@ -34,6 +34,7 @@ Ordem de driver: CLI ou HTTP scriptado no repo, depois `openbot_browser` (abas e
 - `benchmark-checklist`: só quando houver número de performance. Não é teste funcional e não substitui o PASS da superfície.
 - `interrogate`: pressão adversarial em Design ou diff de risco. Ela não assina o veredito do diff; isso é do revisor independente.
 - `thermo-nuclear`: qualidade estrutural em diff grande. Code judo, arquivo passando de 1k, spaghetti. Não substitui o PASS da superfície.
+- Superfície visual: `impeccable-review` (`critique` ou `audit`) e `impeccable-detect` entram como evidência. Os dois são leitura. Nenhum é PASS. PASS continua sendo a jornada, com a tela renderizada.
 
 ## A rubrica de cada teste
 

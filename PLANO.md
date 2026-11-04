@@ -13,7 +13,8 @@ Cada etapa tem entrada, artefato de saída e um portão. A etapa seguinte não c
 | Etapa | Dono | Artefato de saída | Portão |
 | --- | --- | --- | --- |
 | Plan | Planejador | `docs/pstack/plano-<slug>.md` com playbook, checklist, contrato e rota | o critério de pronto está escrito |
-| Design | Planejador, com subagente `architect` | tipos, assinaturas, fronteira de módulo e fora de escopo no plano | sem esse bloco, Build não começa |
+| Design | Planejador, com subagente `architect` | módulos, interface, seam e fora de escopo no plano | sem esse bloco, Build não começa |
+| Superfície | Frontend, skill `impeccable` | modo da tela e código que segue `PRODUCT.md` / `DESIGN.md` | sem UI, uma linha `skip: sem superfície` |
 | Build | Subagente de propósito geral do Planejador | código com teste vermelho antes e `deslop` no diff | build e suíte local verdes no worktree |
 | Test | Testador | PASS ou FAIL na superfície real, com evidência em disco | PASS com caminho de evidência |
 | Deploy | Entregador | PR revisável, CI, veredito independente | APPROVE e pedido explícito do usuário |
@@ -44,7 +45,7 @@ Aberta por quem precisa, dentro do próprio turno, como subagente. Não aparece 
 | Revisor independente | propósito geral | Veredito do diff antes do merge, em contexto novo, com `roles/revisor-subagente.md` |
 | Comment Sicko | propósito geral | Revisão de comentários no diff, com `roles/comment-sicko-subagente.md` |
 | Batedor | somente-leitura | Investigação read-only, resposta citada |
-| Design no OpenDesign | propósito geral, ou o próprio turno | UI, protótipo e design system pelas ferramentas `open-design` do MCP do OpenBot |
+| Superfície visual | Frontend, com `roles/frontend.md` | UI pela família Impeccable. O roteador é a skill `impeccable` |
 
 Regra de ouro: subagente novo a cada rodada. Só reaproveita o mesmo subagente quando o estado local é caro de mover, como checkout, processo vivo ou mudança não commitada.
 
@@ -53,7 +54,7 @@ Regra de ouro: subagente novo a cada rodada. Só reaproveita o mesmo subagente q
 ```mermaid
 flowchart LR
     P["<b>Planejador</b><br/>Plan"] --> D{"portão<br/>Design"}
-    D -->|"tipos, assinaturas,<br/>fronteira escritos"| B["<b>subagente general</b><br/>Build backend ou frontend"]
+    D -->|"interface e seam<br/>escritos"| B["<b>subagente general</b><br/>Build backend ou frontend"]
     D -->|"sem o bloco"| P
     B --> T["<b>Testador</b><br/>Test"]
     T -->|"FAIL + repro"| P
@@ -78,12 +79,39 @@ Tarefa trivial não abre subagente nem dev. O Planejador resolve e responde.
 
 Antes de qualquer Build, o plano responde:
 
-- quais tipos existem e o que cada um significa;
-- qual a assinatura pública de cada módulo tocado;
-- onde fica a fronteira, o que este trabalho não invade;
+- quais módulos e tipos existem e o que cada um significa;
+- qual a interface pública de cada módulo tocado: tudo que quem chama precisa saber, não só a assinatura de tipo;
+- onde fica o seam, e o que este trabalho não invade;
 - o que fica fora de escopo nesta rodada.
 
 Roda num subagente com a skill `architect`. Quando houver duas formas defensáveis, rode `arena` para comparar. Se o pedido é trivial e o desenho é óbvio, escreva uma linha no plano dizendo por que o portão foi dispensado.
+
+## Superfície visual
+
+UI não passa por `open-design`. Passa pela família Impeccable. A skill `impeccable` é o roteador. O modo é da superfície, não do produto: Persuade, Operate, Read ou Experience.
+
+| Pedido | Skill |
+| --- | --- |
+| Tela nova, UX antes do código, `PRODUCT.md`, `DESIGN.md`, tokens | `impeccable-plan` |
+| Ajustar UI que já existe: tom, cor, tipo, ritmo, movimento | `impeccable-steer` |
+| Fechar antes de entregar: polish, harden, copy, devices, performance, vazio | `impeccable-finish` |
+| Variante no browser | `impeccable-live`, só no dev server local |
+| Revisão de UX ou auditoria técnica, sem editar | `impeccable-review` |
+| Detector de slop visual | `impeccable-detect` |
+
+`context` uma vez por sessão. Se falhar, leia `PRODUCT.md` e `DESIGN.md`. Não invente contexto. Antes de editar UI, siga o piso de craft da skill. Não rode instalador, hook nem `doctor` como efeito colateral. `detect` e `critique` não são PASS.
+
+Impeccable desenha a superfície. Não decide o que construir nem o contrato de API. Isso continua no portão de Design e no Produto.
+
+## Produto e implementação
+
+Repos que já usam o fluxo do Matt Pocock trazem glossário, ADR e módulo profundo. Isso encaixa no portão. Não substitui o plano, o Testador nem o revisor.
+
+- Decisão que o repo não responde e só o usuário sabe: `grill-with-docs`, que é `grilling` mais `domain-modeling`. Uma rodada da fronteira, pergunta numerada, resposta recomendada, e espera. Não entreviste fato que está no código. Não aja até o usuário confirmar o entendimento.
+- `GLOSSARY.md` não tem implementação. Termo resolvido entra na hora. ADR só se for difícil de reverter, surpreendente sem contexto e fruto de trade-off real. O texto do ADR continua precisando do sim do usuário.
+- No bloco de Design, fale módulo, interface, seam e profundidade (`codebase-design`). Prefira o seam mais alto que já existe. Seam novo só quando duas implementações de verdade variam ali.
+- Build com spec ou tickets segue `implement`: teste no seam combinado, typecheck no caminho, suíte inteira uma vez no fim. `deslop`, Testador e revisor independente continuam.
+- Sem issue tracker, a spec mora no `plano-<slug>.md`. Não pare para configurar tracker.
 
 ## Profundidade do Plan
 
@@ -93,7 +121,7 @@ Nem todo pedido paga `how` e `why`. A profundidade segue o risco:
 | --- | --- | --- |
 | Trivial, reversível, área conhecida | nada | uma linha dizendo por que dispensou |
 | Médio, área conhecida com histórico | `how` de uma fatia e `why` estreito, só git e GitHub | blocos curtos "Como funciona" e "Por que assim" |
-| Alto, área nova, fronteira de módulo ou regressão | `how` + `why` | os dois blocos; o Design é obrigatório |
+| Alto, área nova, seam de módulo ou regressão | `how` + `why` | os dois blocos; o Design é obrigatório |
 
 `teach` não é portão. É comunicação: explica o trabalho depois, quando o usuário pede.
 
@@ -116,7 +144,7 @@ Merge exige quatro condições juntas: PASS do Testador, APPROVE do revisor, CI 
 
 ## Maintain
 
-Cinco documentos, cinco skills: `manter-contexto` (AGENTS.md), `manter-produto` (regras e ADRs), `manter-testes` (pirâmide e lacunas), `manter-navegacao` (telas e jornadas), `manter-design` (tokens e componentes).
+Cinco documentos, cinco skills: `manter-contexto` (AGENTS.md), `manter-produto` (regras, glossário e ADRs), `manter-testes` (pirâmide e lacunas), `manter-navegacao` (telas e jornadas), `manter-design` (tokens, componentes e o modo da superfície). `docs/DESIGN.md` é o arquivo que o Impeccable lê. Não crie outro.
 
 Contrato comum: diff mínimo, `arquivo:linha` como origem, carimbo de data e commit, `DIVERGE:` quando documento e código se contradizem, `NÃO VERIFICADO` em vez de suposição.
 

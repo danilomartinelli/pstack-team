@@ -61,6 +61,7 @@ Regras:
 - Crie ou reutilize as seções Engenharia, Produto e Arquivo. Coloque cada agente na seção certa e não mova agentes que já existiam.
 - Instale os packs packs/fluxo-dev e packs/manutencao-projeto nos agentes que precisam. Se a ferramenta exigir uma pasta dentro do workspace, copie o pack para o workspace antes de instalar.
 - O pstack e o cursor-team-kit não estão neste repositório. Instale-os da fonte original se o ambiente permitir; se não, pare e diga o que falta. Não copie conteúdo de terceiros sem licença.
+- Superfície visual usa a família Impeccable, se estiver na biblioteca local: o roteador `impeccable` e as skills de plan, steer, finish, live, review e detect. Produto e implementação, em repo que já segue o fluxo mattpocock, usam `grill-with-docs`, `domain-modeling` e `codebase-design`. Não copie o texto dessas skills para este repo. Se a biblioteca não as tiver, pare e diga o que falta. Não use `open-design`.
 - A primeira tarefa de cada agente é ler o próprio papel e ficar pronto. Não execute trabalho de produto nessa instalação.
 - Configure ~/.agents/pstack-models.md somente se eu aprovar os modelos e os preços. Não assuma modelos pagos.
 - Ao terminar, verifique com list_agents, list_local_skills e read_agent: agentes, skills, seções e descrições. Faça um teste de fumaça e não rode tarefa de produto.
@@ -76,8 +77,8 @@ flowchart LR
 ```
 
 - **Plan:** classifica o pedido, escolhe o playbook, escreve o plano e a rota.
-- **Design:** tipos, assinaturas, fronteira e fora de escopo antes do código.
-- **Build:** subagente por metade, teste vermelho antes, `deslop` no diff.
+- **Design:** módulos, interface, seam e fora de escopo antes do código. Superfície visual pela skill `impeccable`, não por `open-design`.
+- **Build:** subagente por metade, teste no seam do plano, `deslop` no diff. Repo com spec ou `GLOSSARY.md` segue esse vocabulário.
 - **Test:** suíte, superfície real e evidência; `swarm` para várias fatias.
 - **Deploy:** PR revisável, CI, veredito independente; merge só com pedido.
 - **Maintain:** documentos vivos com `arquivo:linha` e carimbo de data e commit.
@@ -95,7 +96,7 @@ Renomeie agentes, troque etapas e adicione skills. O que não deve mudar é o co
 
 ## Créditos
 
-O método pstack é de Lauren ([@poteto](https://x.com/poteto)), em [cursor/plugins](https://github.com/cursor/plugins). O cursor-team-kit é do mesmo projeto. Este repositório é uma adaptação independente para o OpenBot, sem vínculo com Cursor.
+O método pstack é de Lauren ([@poteto](https://x.com/poteto)), em [cursor/plugins](https://github.com/cursor/plugins). O cursor-team-kit é do mesmo projeto. A superfície visual aponta para o Impeccable, de [pbakaus/impeccable](https://github.com/pbakaus/impeccable). Produto e implementação, nos repos que já usam esse fluxo, apontam para as skills de Matt Pocock (`grilling`, `grill-with-docs`, `domain-modeling`, `codebase-design`, `implement`). Nenhuma dessas árvores é redistribuída aqui. Este repositório é uma adaptação independente para o OpenBot, sem vínculo com Cursor.
 
 ## Licença
 
