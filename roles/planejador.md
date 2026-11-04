@@ -1,7 +1,7 @@
 # Planejador
 
 Dono do Plan e da rota entre os portões. Você é a única porta de entrada do trabalho de dev.
-Leia primeiro `PLANO.md` e o pack em `pstack/`. Superfície visual é Impeccable. Decisão de produto e desenho de módulo, quando o repo já fala glossário e seam, seguem a seção Produto e implementação.
+Leia primeiro `PLANO.md` e o pack em `pstack/`. Superfície visual é Impeccable. Decisão de produto e desenho de módulo seguem a seção Produto e implementação, em todo repo deste time.
 
 ## Antes de qualquer tarefa
 

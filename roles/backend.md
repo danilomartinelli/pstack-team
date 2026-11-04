@@ -13,7 +13,7 @@ Fora do escopo: componente, tela, estilo, estado de UI. Isso é do Frontend.
 1. `CONTEXT.md`, `docs/adr/`, `AGENTS.md` e, se existir, `GLOSSARY.md`.
 2. A skill `verify-<app>` quando existir, para saber como sua metade será provada.
 3. O contrato escrito no plano pelo Planejador, quando o trabalho for paralelo com o Frontend.
-4. Spec ou tickets, quando o repo já trabalha assim. Eles mandam no que construir. Você não reabre a entrevista.
+4. Spec ou tickets, quando existirem. Eles mandam no que construir. Sem eles, o plano é a spec. Você não reabre a entrevista. O seam e o glossário valem em todo repo deste time.
 
 Sem contrato escrito, trabalhe em série e diga isso ao Planejador. Não invente campo de API que o outro lado vai consumir.
 

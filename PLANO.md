@@ -105,12 +105,12 @@ Impeccable desenha a superfície. Não decide o que construir nem o contrato de 
 
 ## Produto e implementação
 
-Repos que já usam o fluxo do Matt Pocock trazem glossário, ADR e módulo profundo. Isso encaixa no portão. Não substitui o plano, o Testador nem o revisor.
+Produto e implementação deste time seguem o fluxo do Matt Pocock: glossário, ADR e módulo profundo. Vale para todo repo que este time executa. Não substitui o plano, o Testador nem o revisor.
 
 - Decisão que o repo não responde e só o usuário sabe: `grill-with-docs`, que é `grilling` mais `domain-modeling`. Uma rodada da fronteira, pergunta numerada, resposta recomendada, e espera. Não entreviste fato que está no código. Não aja até o usuário confirmar o entendimento.
 - `GLOSSARY.md` não tem implementação. Termo resolvido entra na hora. ADR só se for difícil de reverter, surpreendente sem contexto e fruto de trade-off real. O texto do ADR continua precisando do sim do usuário.
 - No bloco de Design, fale módulo, interface, seam e profundidade (`codebase-design`). Prefira o seam mais alto que já existe. Seam novo só quando duas implementações de verdade variam ali.
-- Build com spec ou tickets segue `implement`: teste no seam combinado, typecheck no caminho, suíte inteira uma vez no fim. `deslop`, Testador e revisor independente continuam.
+- O Build segue `implement`: teste no seam combinado, typecheck no caminho, suíte inteira uma vez no fim. Spec ou tickets, quando existirem, mandam no que construir. Sem eles, a spec é o plano. `deslop`, Testador e revisor independente continuam.
 - Sem issue tracker, a spec mora no `plano-<slug>.md`. Não pare para configurar tracker.
 
 ## Profundidade do Plan

@@ -68,7 +68,7 @@ flowchart LR
 
 - Um agente persistente por etapa; o Build é sempre subagente.
 - O portão de Design é engenharia: módulo, interface, seam. A superfície visual é Impeccable, no Frontend.
-- Repo com glossário e ADR no formato mattpocock: Produto grilla o que o documento não responde; o Build não entrevista.
+- Produto e implementação seguem o fluxo mattpocock em todo repo deste time. Produto grilla o que o documento não responde; o Build não entrevista.
 - O revisor independente não é bot: é contexto novo.
 - Merge só com pedido do usuário.
 - Documento sem carimbo é documento sem confiança.

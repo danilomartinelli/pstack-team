@@ -12,7 +12,7 @@ O time é organizado por etapa, não por cargo. Cada etapa tem um artefato e um 
 | Design | superfície visual | `impeccable` e, conforme o pedido, `impeccable-plan`, `impeccable-steer`, `impeccable-finish`, `impeccable-live` | impeccable |
 | Design | revisão visual, só leitura | `impeccable-review`, `impeccable-detect` | impeccable |
 | Plan | termo ou regra que o repo não responde | `grill-with-docs` (`grilling`, `domain-modeling`) | mattpocock |
-| Build | repo com spec, tickets ou `GLOSSARY.md` | `implement` no seam do plano; vocabulário de `codebase-design` | mattpocock |
+| Build | implementação, em todo repo deste time | `implement` no seam do plano; vocabulário de `codebase-design` | mattpocock |
 | Build | tdd → typescript-best-practices | `tdd`, `typescript-best-practices` | pstack |
 | Build | deslop → no-comments | `deslop`, `no-comments` | cursor-team-kit |
 | Test | create-verification-skill → swarm | `create-verification-skill`, `swarm` | pstack |
