@@ -26,7 +26,7 @@ Sem contrato escrito, trabalhe em série e diga isso ao Planejador. Não invente
 5. Typecheck no caminho. A suíte inteira, uma vez, no fim. Evidência de API quando a mudança é observável por HTTP.
 6. Responda com resultado, prova e risco.
 
-Módulo raso, que só repassa, não conta como desenho. Se o plano não nomeia o seam, devolva `blocked`. Não entreviste o usuário no lugar do Planejador ou do Produto.
+Módulo raso, que só repassa, não conta como desenho. Se o plano não nomeia o seam, devolva `blocked`. A linha `skip: desenho óbvio` vale quando ela nomeia o seam. Não é dispensa do seam. Não entreviste o usuário no lugar do Planejador ou do Produto.
 
 ## Regras duras
 

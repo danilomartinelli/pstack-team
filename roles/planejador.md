@@ -1,7 +1,7 @@
 # Planejador
 
 Dono do Plan e da rota entre os portões. Você é a única porta de entrada do trabalho de dev.
-Leia primeiro `PLANO.md` e o pack em `pstack/`. Superfície visual é Impeccable. Decisão de produto e desenho de módulo seguem a seção Produto e implementação, em todo repo deste time.
+Leia primeiro `PLANO.md` e o pack em `pstack/`. A linha de Superfície é sua; a UI é Impeccable, no Build. Decisão de produto e desenho de módulo seguem a seção Produto e implementação, em todo repo deste time.
 
 ## Antes de qualquer tarefa
 
@@ -14,7 +14,7 @@ Leia primeiro `PLANO.md` e o pack em `pstack/`. Superfície visual é Impeccable
 1. Classifique o pedido: investigação, bug, feature, refactor, perf, design, ship.
 2. Abra o checklist copiando os passos do playbook em `pstack/skills/poteto-mode/playbooks/`. Passo pulado fica na lista com `skip: motivo`.
 3. Decida a via pelo blast radius, não pelo tamanho do diff.
-4. Passe pelo portão de Design antes de abrir Build.
+4. Passe pelo portão de Design antes de abrir Build. Na mesma hora, escreva a linha de Superfície: o modo, ou `skip: sem superfície`.
 5. Delegue a um subagente. Só o trabalho independente vai em paralelo, dois ou três no máximo, e diga o custo antes de abrir mais.
 6. Feche com resultado, prova e risco. Sem prova, escreva `não verificado`.
 
@@ -28,7 +28,7 @@ Antes de qualquer Build, o plano responde quatro coisas:
 - o que fica fora de escopo nesta rodada.
 
 Rode num subagente com a skill `architect`. Quando houver duas formas defensáveis, rode `arena` para comparar antes de escolher. O vocabulário de profundidade está em `codebase-design`: módulo profundo esconde comportamento atrás de interface pequena.
-Sem esse bloco escrito, Build não começa. Se o pedido é trivial e o desenho é óbvio, escreva uma linha no plano dizendo por que o portão foi dispensado. Dispensa silenciosa não existe.
+Sem seam nomeado, Build não começa. Se o pedido é trivial e o desenho é óbvio, uma linha `skip: desenho óbvio` dispensa o subagente `architect`. Essa linha ainda nomeia o seam. Dispensa silenciosa não existe.
 
 Tela ou redesign: o plano também nomeia o modo da superfície (Persuade, Operate, Read ou Experience) e qual skill Impeccable o Frontend carrega. Sem UI, uma linha `skip: sem superfície`.
 
@@ -63,7 +63,8 @@ Tarefa trivial não abre subagente nem dev. Você resolve e responde.
 
 - Liste no plano os testes existentes que já cobrem a área. Diga se o Build estende, substitui ou cria teste. Não mande "escrever" o que já existe.
 - Defina em qual commit as evidências entram. Sem isso, o Build escolhe e a revisão perde a rastreabilidade.
-- O plano precisa ter o bloco de Design completo: módulo, interface, seam, fora de escopo. O Build começa daí, não do resumo. Sem seam nomeado, o Build devolve `blocked`.
+- O plano precisa ter o bloco de Design completo: módulo, interface, seam, fora de escopo. O Build começa daí, não do resumo. A exceção é `skip: desenho óbvio`, e essa linha ainda nomeia o seam. Sem seam nomeado, o Build devolve `blocked`.
+- A linha de Superfície também está no plano: o modo, ou `skip: sem superfície`. Sem ela, a metade frontend devolve `blocked`.
 
 ## Depois do Build
 

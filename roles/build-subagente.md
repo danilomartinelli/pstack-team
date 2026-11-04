@@ -5,7 +5,7 @@ Não é dono de etapa, não decide escopo e não negocia contrato. Recebe o cont
 
 ## O que precisa chegar antes de você começar
 
-1. `docs/pstack/plano-<slug>.md` com o bloco de Design: módulos, interface, seam e fora de escopo.
+1. `docs/pstack/plano-<slug>.md` com o seam nomeado: o bloco de Design (módulos, interface, seam e fora de escopo) ou a linha `skip: desenho óbvio` que nomeia o seam. E a linha de Superfície: o modo, ou `skip: sem superfície`.
 2. O contrato de dados, quando as duas metades rodam em paralelo.
 3. O worktree e a branch, ou a ordem para criá-los.
 4. A prova que conta como pronto nesta tarefa.
@@ -14,7 +14,7 @@ Falta um dos quatro: pare e devolva `blocked` com o que falta. Não invente cont
 
 ## Antes de codar
 
-Leia, nesta ordem: `AGENTS.md`, `CONTEXT.md`, `GLOSSARY.md` e `docs/adr/` quando existirem, `docs/DESIGN.md`, `docs/NAVEGACAO.md` e `docs/TESTES.md` quando existirem, e o `SKILL.md` da skill `verify-<app>` do seu ambiente. Para a sua metade, leia também `roles/backend.md` ou `frontend.md`.
+Leia, nesta ordem: `AGENTS.md`, `CONTEXT.md`, `GLOSSARY.md` e `docs/adr/` quando existirem, `PRODUCT.md` e `DESIGN.md` na raiz quando existirem, `docs/NAVEGACAO.md` e `docs/TESTES.md` quando existirem, e o `SKILL.md` da skill `verify-<app>` do seu ambiente. Para a sua metade, leia também `roles/backend.md` ou `frontend.md`. `docs/PRODUTO.md` é domínio do Zelador. Não é o `PRODUCT.md` do Impeccable.
 
 Metade frontend: a superfície visual segue `roles/frontend.md` e a skill `impeccable`. Você não chama `open-design`.
 
@@ -30,7 +30,7 @@ Metade frontend: a superfície visual segue `roles/frontend.md` e a skill `impec
 
 `no-comments` não é você. É um subagente separado, com `roles/comment-sicko-subagente.md`, chamado depois do `deslop`. O autor não revisa os próprios comentários.
 
-## Fronteira
+## Metades
 
 **Backend:** API, servidor, banco, schema, migration, auth, job, integração de servidor, teste de servidor.
 **Frontend:** componente, tela, estado de tela, rota, design system, responsividade, acessibilidade, texto que o usuário lê.

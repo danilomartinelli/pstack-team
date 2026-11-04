@@ -3,7 +3,7 @@
 Estrutura para rodar trabalho de desenvolvimento com agentes organizados por **etapa do ciclo de vida**, não por cargo.
 
 ```text
-Plan -> Design -> Build -> Test -> Deploy -> Maintain -> Plan
+Plan -> Design -> Superfície -> Build -> Test -> Deploy -> Maintain -> Plan
 ```
 
 Cada etapa tem entrada, artefato de saída e um portão. A etapa seguinte não começa sem o artefato da anterior.
@@ -13,9 +13,9 @@ Cada etapa tem entrada, artefato de saída e um portão. A etapa seguinte não c
 | Etapa | Dono | Artefato de saída | Portão |
 | --- | --- | --- | --- |
 | Plan | Planejador | `docs/pstack/plano-<slug>.md` com playbook, checklist, contrato e rota | o critério de pronto está escrito |
-| Design | Planejador, com subagente `architect` | módulos, interface, seam e fora de escopo no plano | sem esse bloco, Build não começa |
-| Superfície | Frontend, skill `impeccable` | modo da tela e código que segue `PRODUCT.md` / `DESIGN.md` | sem UI, uma linha `skip: sem superfície` |
-| Build | Subagente de propósito geral do Planejador | código com teste vermelho antes e `deslop` no diff | build e suíte local verdes no worktree |
+| Design | Planejador, com subagente `architect` | módulos, interface, seam e fora de escopo no plano | sem seam nomeado, Build não começa |
+| Superfície | Planejador | uma linha no plano: o modo (Persuade, Operate, Read ou Experience), ou `skip: sem superfície` | sem essa linha, a metade de UI não começa |
+| Build | Subagente de propósito geral do Planejador | código com teste vermelho antes e `deslop` no diff. A UI nasce aqui, com `impeccable` | build e suíte local verdes no worktree |
 | Test | Testador | PASS ou FAIL na superfície real, com evidência em disco | PASS com caminho de evidência |
 | Deploy | Entregador | PR revisável, CI, veredito independente | APPROVE e pedido explícito do usuário |
 | Maintain | Zelador | documento atualizado com carimbo de data e commit | documento cita `arquivo:linha` |
@@ -41,11 +41,10 @@ Aberta por quem precisa, dentro do próprio turno, como subagente. Não aparece 
 | Papel | Tipo de subagente | Quando |
 | --- | --- | --- |
 | Arquiteto | propósito geral | Portão de Design, modelagem de domínio, arena de protótipos |
-| Construtor de Build | propósito geral | Uma metade por vez, com `roles/build-subagente.md` |
+| Construtor de Build | propósito geral | Uma metade por vez, com `roles/build-subagente.md`. A metade frontend carrega `impeccable` neste turno |
 | Revisor independente | propósito geral | Veredito do diff antes do merge, em contexto novo, com `roles/revisor-subagente.md` |
 | Comment Sicko | propósito geral | Revisão de comentários no diff, com `roles/comment-sicko-subagente.md` |
 | Batedor | somente-leitura | Investigação read-only, resposta citada |
-| Superfície visual | Frontend, com `roles/frontend.md` | UI pela família Impeccable. O roteador é a skill `impeccable` |
 
 Regra de ouro: subagente novo a cada rodada. Só reaproveita o mesmo subagente quando o estado local é caro de mover, como checkout, processo vivo ou mudança não commitada.
 
@@ -54,8 +53,10 @@ Regra de ouro: subagente novo a cada rodada. Só reaproveita o mesmo subagente q
 ```mermaid
 flowchart LR
     P["<b>Planejador</b><br/>Plan"] --> D{"portão<br/>Design"}
-    D -->|"interface e seam<br/>escritos"| B["<b>subagente general</b><br/>Build backend ou frontend"]
-    D -->|"sem o bloco"| P
+    D -->|"seam nomeado"| S{"linha de<br/>Superfície"}
+    D -->|"sem seam"| P
+    S -->|"modo nomeado"| B["<b>subagente general</b><br/>Build backend ou frontend"]
+    S -->|"skip: sem superfície"| B
     B --> T["<b>Testador</b><br/>Test"]
     T -->|"FAIL + repro"| P
     T -->|"PASS + evidência"| E["<b>Entregador</b><br/>Deploy"]
@@ -84,11 +85,13 @@ Antes de qualquer Build, o plano responde:
 - onde fica o seam, e o que este trabalho não invade;
 - o que fica fora de escopo nesta rodada.
 
-Roda num subagente com a skill `architect`. Quando houver duas formas defensáveis, rode `arena` para comparar. Se o pedido é trivial e o desenho é óbvio, escreva uma linha no plano dizendo por que o portão foi dispensado.
+Roda num subagente com a skill `architect`. Quando houver duas formas defensáveis, rode `arena` para comparar. Se o pedido é trivial e o desenho é óbvio, uma linha `skip: desenho óbvio` dispensa o subagente. Essa linha ainda nomeia o seam. Sem seam nomeado, o Build devolve `blocked`.
 
 ## Superfície visual
 
-UI não passa por `open-design`. Passa pela família Impeccable. A skill `impeccable` é o roteador. O modo é da superfície, não do produto: Persuade, Operate, Read ou Experience.
+UI não passa por `open-design`. Passa pela família Impeccable, no Build, na metade frontend. A skill `impeccable` é o roteador. O modo é da superfície, não do produto: Persuade, Operate, Read ou Experience.
+
+O Planejador escreve essa escolha no plano antes do Build: o modo, ou `skip: sem superfície`. O Frontend não codifica numa etapa anterior. O teste vermelho continua sendo o primeiro código. `impeccable-review` e `impeccable-detect` são do Testador. Os dois são leitura. Nenhum é PASS.
 
 | Pedido | Skill |
 | --- | --- |
@@ -99,7 +102,7 @@ UI não passa por `open-design`. Passa pela família Impeccable. A skill `impecc
 | Revisão de UX ou auditoria técnica, sem editar | `impeccable-review` |
 | Detector de slop visual | `impeccable-detect` |
 
-`context` uma vez por sessão. Se falhar, leia `PRODUCT.md` e `DESIGN.md`. Não invente contexto. Antes de editar UI, siga o piso de craft da skill. Não rode instalador, hook nem `doctor` como efeito colateral. `detect` e `critique` não são PASS.
+`context` uma vez por sessão. Se falhar, leia `PRODUCT.md` e `DESIGN.md` na raiz do repo. Não invente contexto. Antes de editar UI, siga o piso de craft da skill. Não rode instalador, hook nem `doctor` como efeito colateral. O autor da tela não roda `impeccable-review`. Pode rodar `impeccable-detect` como evidência própria. Não é PASS.
 
 Impeccable desenha a superfície. Não decide o que construir nem o contrato de API. Isso continua no portão de Design e no Produto.
 
@@ -107,7 +110,7 @@ Impeccable desenha a superfície. Não decide o que construir nem o contrato de 
 
 Produto e implementação deste time seguem o fluxo do Matt Pocock: glossário, ADR e módulo profundo. Vale para todo repo que este time executa. Não substitui o plano, o Testador nem o revisor.
 
-- Decisão que o repo não responde e só o usuário sabe: `grill-with-docs`, que é `grilling` mais `domain-modeling`. Uma rodada da fronteira, pergunta numerada, resposta recomendada, e espera. Não entreviste fato que está no código. Não aja até o usuário confirmar o entendimento.
+- Decisão que o repo não responde e só o usuário sabe: o Produto roda `grill-with-docs`, que é `grilling` mais `domain-modeling`. Uma rodada de perguntas numeradas sobre o que o repo não responde, cada uma com resposta recomendada, e espera. Não entreviste fato que está no código. Não aja até o usuário confirmar o entendimento. Seam que só o usuário escolhe: o Planejador faz uma rodada de `grilling`, não de `grill-with-docs`.
 - `GLOSSARY.md` não tem implementação. Termo resolvido entra na hora. ADR só se for difícil de reverter, surpreendente sem contexto e fruto de trade-off real. O texto do ADR continua precisando do sim do usuário.
 - No bloco de Design, fale módulo, interface, seam e profundidade (`codebase-design`). Prefira o seam mais alto que já existe. Seam novo só quando duas implementações de verdade variam ali.
 - O Build segue `implement`: teste no seam combinado, typecheck no caminho, suíte inteira uma vez no fim. Spec ou tickets, quando existirem, mandam no que construir. Sem eles, a spec é o plano. `deslop`, Testador e revisor independente continuam.
@@ -144,7 +147,7 @@ Merge exige quatro condições juntas: PASS do Testador, APPROVE do revisor, CI 
 
 ## Maintain
 
-Cinco documentos, cinco skills: `manter-contexto` (AGENTS.md), `manter-produto` (regras, glossário e ADRs), `manter-testes` (pirâmide e lacunas), `manter-navegacao` (telas e jornadas), `manter-design` (tokens, componentes e o modo da superfície). `docs/DESIGN.md` é o arquivo que o Impeccable lê. Não crie outro.
+Cinco documentos, cinco skills: `manter-contexto` (AGENTS.md), `manter-produto` (regras, glossário e ADRs), `manter-testes` (pirâmide e lacunas), `manter-navegacao` (telas e jornadas), `manter-design` (tokens, componentes e o modo da superfície). O Impeccable lê `PRODUCT.md` e `DESIGN.md` na raiz do repo. `impeccable-plan` escreve esses dois. Não crie um segundo design doc, inclusive `docs/DESIGN.md`. `docs/PRODUTO.md` é o registro de domínio do Zelador. Não é o `PRODUCT.md` do Impeccable, e um não se copia no outro.
 
 Contrato comum: diff mínimo, `arquivo:linha` como origem, carimbo de data e commit, `DIVERGE:` quando documento e código se contradizem, `NÃO VERIFICADO` em vez de suposição.
 

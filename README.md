@@ -3,7 +3,7 @@
 Um template de time de agentes de IA para desenvolvimento de software, organizado por etapa do ciclo de vida:
 
 ```text
-Plan -> Design -> Build -> Test -> Deploy -> Maintain -> Plan
+Plan -> Design -> Superfície -> Build -> Test -> Deploy -> Maintain -> Plan
 ```
 
 Não é um framework de código. É uma estrutura de papéis, portões, artefatos e skills para rodar trabalho de dev com agentes que verificam o que fazem.
@@ -19,22 +19,25 @@ Não é um framework de código. É uma estrutura de papéis, portões, artefato
 | `packs/fluxo-dev` | Skill que operacionaliza o fluxo de uma tarefa |
 | `packs/manutencao-projeto` | Cinco skills de Maintain |
 
-O pstack e o cursor-team-kit não são redistribuídos aqui. Instale-os das fontes originais.
+O pstack, o cursor-team-kit, o Impeccable e as skills de Matt Pocock não são redistribuídos aqui. Instale os quatro das fontes originais. Falta um: pare e diga qual. Não copie o texto dessas skills para este repo. Não use `open-design`.
 
 ## Como usar
 
 1. **Clone o repositório** e leia `PLANO.md`. Ele explica o desenho antes de qualquer comando.
 2. **Instale o pstack** da fonte original ([cursor/plugins](https://github.com/cursor/plugins/tree/main/pstack)) na biblioteca de skills do seu ambiente de agentes. Ele é a base de Plan, Design, Build e Test.
-3. **Instale as skills deste repo** na biblioteca local:
+3. **Instale o cursor-team-kit** da fonte original ([cursor/plugins](https://github.com/cursor/plugins/tree/main/cursor-team-kit)). Ele cobre limpeza de diff, CI, PR e revisão estrutural.
+4. **Instale o Impeccable** da fonte original ([pbakaus/impeccable](https://github.com/pbakaus/impeccable)): o roteador `impeccable` e as skills `impeccable-plan`, `impeccable-steer`, `impeccable-finish`, `impeccable-live`, `impeccable-review` e `impeccable-detect`.
+5. **Instale as skills de Matt Pocock** da fonte original ([mattpocock/skills](https://github.com/mattpocock/skills)): `grilling`, `grill-with-docs`, `domain-modeling`, `codebase-design` e `implement`. Elas são o fluxo de produto e implementação em todo repo que este time executa.
+6. **Instale as skills deste repo** na biblioteca local:
    - `packs/fluxo-dev`
    - `packs/manutencao-projeto`
 
    No OpenBot, use a biblioteca de skills e instale nos agentes. Em outro ambiente, aponte o agente para o `SKILL.md` do pack. Nos papéis, `pstack/` significa a pasta do pack pstack instalado.
-4. **Crie os cinco agentes persistentes** com as descrições de `roles/`: Planejador, Testador, Entregador, Zelador e Produto. O Build não é agente persistente: é um subagente de propósito geral com o brief `roles/build-subagente.md`.
-5. **Crie os subagentes de apoio** a partir dos briefs: revisor independente (`roles/revisor-subagente.md`) e Comment Sicko (`roles/comment-sicko-subagente.md`).
-6. **Configure o mapa de modelos** em `~/.agents/pstack-models.md`, se o seu ambiente permitir modelos por subagente. Sem isso, todos herdam o modelo do pai.
-7. **Adapte o projeto alvo**: `AGENTS.md`, `CONTEXT.md`, `docs/` e a skill `verify-<app>`. O time é transversal; o contexto do produto mora no repo do produto.
-8. **Rode a primeira tarefa pelo Planejador.** Ele classifica, abre o plano, passa pelo Design, delega o Build, chama o Testador e o Entregador. O merge espera pedido explícito do usuário.
+7. **Crie os cinco agentes persistentes** com as descrições de `roles/`: Planejador, Testador, Entregador, Zelador e Produto. O Build não é agente persistente: é um subagente de propósito geral com o brief `roles/build-subagente.md`.
+8. **Crie os subagentes de apoio** a partir dos briefs: revisor independente (`roles/revisor-subagente.md`) e Comment Sicko (`roles/comment-sicko-subagente.md`).
+9. **Configure o mapa de modelos** em `~/.agents/pstack-models.md`, se o seu ambiente permitir modelos por subagente. Sem isso, todos herdam o modelo do pai.
+10. **Adapte o projeto alvo**: `AGENTS.md`, `CONTEXT.md`, `docs/` e a skill `verify-<app>`. O time é transversal; o contexto do produto mora no repo do produto.
+11. **Rode a primeira tarefa pelo Planejador.** Ele classifica, abre o plano, passa pelo Design, escreve a linha de Superfície (o modo, ou `skip: sem superfície`), delega o Build, chama o Testador e o Entregador. O merge espera pedido explícito do usuário.
 
 ## Prompt de instalação (OpenBot)
 
@@ -60,8 +63,7 @@ Regras:
 - Build, Arquiteto, Revisor independente e Comment Sicko são subagentes. Não crie agentes persistentes para eles; use os briefs em roles/.
 - Crie ou reutilize as seções Engenharia, Produto e Arquivo. Coloque cada agente na seção certa e não mova agentes que já existiam.
 - Instale os packs packs/fluxo-dev e packs/manutencao-projeto nos agentes que precisam. Se a ferramenta exigir uma pasta dentro do workspace, copie o pack para o workspace antes de instalar.
-- O pstack e o cursor-team-kit não estão neste repositório. Instale-os da fonte original se o ambiente permitir; se não, pare e diga o que falta. Não copie conteúdo de terceiros sem licença.
-- Superfície visual usa a família Impeccable, se estiver na biblioteca local: o roteador `impeccable` e as skills de plan, steer, finish, live, review e detect. Produto e implementação usam `grilling`, `grill-with-docs`, `domain-modeling`, `codebase-design` e `implement` em todo repo que este time executa. Não copie o texto dessas skills para este repo. Se a biblioteca não as tiver, pare e diga o que falta. Não use `open-design`.
+- Quatro árvores não estão neste repositório. Instale cada uma da fonte original, do mesmo jeito: pstack e cursor-team-kit em https://github.com/cursor/plugins, Impeccable em https://github.com/pbakaus/impeccable (roteador `impeccable` e plan, steer, finish, live, review, detect), e as skills de Matt Pocock (`grilling`, `grill-with-docs`, `domain-modeling`, `codebase-design`, `implement`) em https://github.com/mattpocock/skills. Elas valem em todo repo que este time executa. Se faltar alguma, pare e diga o que falta. Não copie o texto dessas skills para este repo. Não use `open-design`.
 - A primeira tarefa de cada agente é ler o próprio papel e ficar pronto. Não execute trabalho de produto nessa instalação.
 - Configure ~/.agents/pstack-models.md somente se eu aprovar os modelos e os preços. Não assuma modelos pagos.
 - Ao terminar, verifique com list_agents, list_local_skills e read_agent: agentes, skills, seções e descrições. Faça um teste de fumaça e não rode tarefa de produto.
@@ -73,11 +75,15 @@ Comece listando o estado atual e o plano. Espere meu "sim".
 
 ```mermaid
 flowchart LR
-  P[Plan] --> D[Design] --> B[Build] --> T[Test] --> DP[Deploy] --> M[Maintain] --> P
+  P[Plan] --> D[Design] --> S[Superfície]
+  S -->|modo| B[Build]
+  S -->|"skip: sem superfície"| B
+  B --> T[Test] --> DP[Deploy] --> M[Maintain] --> P
 ```
 
 - **Plan:** classifica o pedido, escolhe o playbook, escreve o plano e a rota.
-- **Design:** módulos, interface, seam e fora de escopo antes do código. Superfície visual pela skill `impeccable`, não por `open-design`.
+- **Design:** módulos, interface, seam e fora de escopo antes do código.
+- **Superfície:** o Planejador nomeia o modo (Persuade, Operate, Read ou Experience) ou escreve `skip: sem superfície`. O Frontend escreve a UI no Build, com a skill `impeccable`. Não use `open-design`.
 - **Build:** subagente por metade, teste no seam do plano, `deslop` no diff. O vocabulário é o de `codebase-design`, em todo repo deste time.
 - **Test:** suíte, superfície real e evidência; `swarm` para várias fatias.
 - **Deploy:** PR revisável, CI, veredito independente; merge só com pedido.
@@ -100,4 +106,4 @@ O método pstack é de Lauren ([@poteto](https://x.com/poteto)), em [cursor/plug
 
 ## Licença
 
-MIT. Veja [`LICENSE`](./LICENSE). O pstack e o cursor-team-kit mantêm as licenças dos projetos originais.
+MIT. Veja [`LICENSE`](./LICENSE). O pstack, o cursor-team-kit, o Impeccable e as skills de Matt Pocock mantêm as licenças dos projetos originais.

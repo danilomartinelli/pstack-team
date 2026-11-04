@@ -7,6 +7,8 @@ description: Mantém o registro do produto verdadeiro — o que ele é, para que
 
 Documento alvo: `docs/PRODUTO.md` para o estado atual, `docs/adr/` para decisões datadas. Se o repo tiver `GLOSSARY.md`, ou um `GLOSSARY-MAP.md` apontando glossários por contexto, esse arquivo é o vocabulário. Glossário não tem implementação, não é spec e não é backlog.
 
+`docs/PRODUTO.md` não é o `PRODUCT.md` do Impeccable. Aquele fica na raiz e é contexto da superfície, escrito por `impeccable-plan`. Não copie um no outro.
+
 ## Regra de ouro
 
 **ADR não se corrige, se supersede.** Um ADR registra uma decisão que existiu. Se ela foi revertida, escreva um novo com número maior, citando o antigo como substituído. Apagar o texto falsifica o histórico e deixa o próximo agente sem saber por que o código está do jeito que está.

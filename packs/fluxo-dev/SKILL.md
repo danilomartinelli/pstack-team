@@ -10,8 +10,8 @@ Uma tarefa por vez, na ordem dos portões. Cada portão entrega um artefato. Sem
 | # | Etapa | Dono | Artefato | Segue quando |
 | --- | --- | --- | --- | --- |
 | 1 | Plan | Planejador | `docs/pstack/plano-<slug>.md` com playbook, checklist, contrato e rota | o critério de pronto está escrito |
-| 2 | Design | Planejador + subagente `architect` | módulos, interface, seam e fora de escopo no plano | o bloco de Design existe |
-| 2b | Superfície | Frontend, skill `impeccable` | modo da tela; `skip: sem superfície` quando não há UI | o plano nomeia o modo ou o skip |
+| 2 | Design | Planejador + subagente `architect` | módulos, interface, seam e fora de escopo no plano | o seam está nomeado |
+| 2b | Superfície | Planejador | modo da tela, ou `skip: sem superfície` | o plano nomeia o modo ou o skip |
 | 3 | Build | Subagente de propósito geral do Planejador | código com teste vermelho antes; `deslop` no diff | build e suíte local verdes no worktree |
 | 4 | Test | Testador | PASS ou FAIL na superfície real, com evidência em disco | PASS com caminho de evidência |
 | 5 | Deploy | Entregador | PR, CI verde, veredito independente | APPROVE e pedido de merge |
@@ -19,9 +19,9 @@ Uma tarefa por vez, na ordem dos portões. Cada portão entrega um artefato. Sem
 
 ## Profundidade do Plan
 
-Nem todo pedido paga `how` e `why`. Trivial e reversível: dispense com uma linha. Médio: `how` de uma fatia e `why` estreito, só git e GitHub. Alto, área nova ou regressão: `how` + `why`; o Design é obrigatório. `teach` não é portão; é explicação depois, quando o usuário pede.
+Nem todo pedido paga `how` e `why`. Trivial e reversível: dispense `how` e `why` com uma linha. Nesse mesmo caso, o portão de Design aceita `skip: desenho óbvio` só se a linha nomear o seam. Médio: `how` de uma fatia e `why` estreito, só git e GitHub. Alto, área nova ou regressão: `how` + `why`; o bloco de Design é obrigatório, sem esse skip. `teach` não é portão; é explicação depois, quando o usuário pede.
 
-Regra ou termo que o repo não responde vai ao Produto com `grill-with-docs`. Uma rodada, resposta recomendada, e espera. O Build não entrevista. Tela nova ou redesign carrega `impeccable` no Frontend. `impeccable-review` e `impeccable-detect` são leitura e não são PASS.
+Regra ou termo que o repo não responde vai ao Produto com `grill-with-docs`. Uma rodada de perguntas numeradas, cada uma com resposta recomendada, e espera. O Build não entrevista. Seam que só o usuário escolhe: o Planejador faz uma rodada de `grilling`. Tela nova ou redesign carrega `impeccable` no Frontend, dentro do Build. `impeccable-review` e `impeccable-detect` são do Testador, são leitura e não são PASS. O autor da tela pode rodar `impeccable-detect`. Não roda `impeccable-review`.
 
 ## Limpeza do Build
 
@@ -50,7 +50,7 @@ Regra ou termo que o repo não responde vai ao Produto com `grill-with-docs`. Um
 ## Nunca
 
 - Perguntar permissão para ação reversível que o pedido já cobre.
-- Começar Build sem o bloco de Design, ou pular etapa sem uma linha no plano dizendo por quê.
+- Começar Build sem seam nomeado. `skip: desenho óbvio` só vale com o seam nessa linha. Pular a Superfície sem `skip: sem superfície` também não vale.
 - Levar ao usuário uma escolha que o plano, o código ou um documento do repo já responde.
 - Declarar pronto sem PASS na superfície real.
 - Inventar comando, caminho, número ou estado de CI.
@@ -65,8 +65,8 @@ Copie para o plano e marque conforme avança. Passo pulado fica com `skip: motiv
 [ ] 3. profundidade do Plan decidida: skip, how+why, ou how+why com Design obrigatório
 [ ] 4. testes existentes listados; estender, substituir ou criar
 [ ] 5. contrato de dados escrito, se as duas metades do Build rodam em paralelo
-[ ] 6. bloco de Design: módulos, interface, seam, fora de escopo
-[ ] 6b. superfície: modo Impeccable, ou skip: sem UI
+[ ] 6. bloco de Design: módulos, interface, seam, fora de escopo; ou skip: desenho óbvio com o seam nomeado
+[ ] 6b. superfície: modo Impeccable, ou skip: sem superfície
 [ ] 6c. se existe GLOSSARY.md: os termos do plano batem com ele
 [ ] 7. commit das evidências definido
 [ ] 8. teste vermelho antes da implementação

@@ -19,7 +19,7 @@ Independência não é um cargo, é ausência de compromisso com a solução. Qu
 1. **Comportamento.** O teste falha quando o comportamento quebra e continua passando quando só o interno muda? Teste de implementação é achado.
 2. **Raiz.** O diff trata o sintoma ou o primeiro ponto onde o sistema se desviou? Guarda só vale se o estado tratado for legítimo.
 3. **Blast radius.** O que quebra fora do diff. Leia `pstack/skills/blast-radius/SKILL.md`. Ache o fato único do qual a segurança depende e prove rodando, não escrevendo.
-4. **Fronteira e tipos.** Validação no limite, estado ilegal impossível, `any` e catch vazio onde deveria ser erro tipado.
+4. **Limite e tipos.** Validação no limite, estado ilegal impossível, `any` e catch vazio onde deveria ser erro tipado.
 5. **Peso morto.** Abstração com um chamador, código órfão, compatibilidade descartável que ficou.
 6. **Comentário.** `pstack/skills/no-comments/SKILL.md`. Comentário que narra ou desculpa é achado.
 7. **Superfície.** Segredo, caminho privado, dado do usuário em log ou em mensagem.

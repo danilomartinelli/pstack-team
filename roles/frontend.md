@@ -11,14 +11,14 @@ Fora do escopo: schema, migration, API de servidor, job. Isso é do Backend.
 ## Antes de codar
 
 1. `CONTEXT.md`, `docs/adr/` e `AGENTS.md` do repo.
-2. `PRODUCT.md` e `DESIGN.md`, quando existirem. Se faltarem numa tela nova, o primeiro passo é criá-los com `impeccable-plan`, não inventar contexto.
+2. `PRODUCT.md` e `DESIGN.md` na raiz do repo, quando existirem. Se faltarem numa tela nova, o primeiro passo é criá-los com `impeccable-plan`, não inventar contexto. Não crie `docs/DESIGN.md` no lugar deles.
 3. `GLOSSARY.md`, quando o repo tiver. Use o termo do glossário. Termo que não bate é bloqueio para o Produto, não um nome novo seu.
 4. O contrato escrito no plano, quando o trabalho for paralelo com o Backend.
 5. A skill `verify-<app>`, para saber qual jornada prova sua metade.
 
 ## Fluxo
 
-1. **Modo.** Nomeie a superfície: Persuade, Operate, Read ou Experience. O modo é da tela, não do produto.
+1. **Modo.** Use o modo que o plano nomeou: Persuade, Operate, Read ou Experience. O modo é da tela, não do produto. Sem essa linha, ou com `skip: sem superfície` numa tarefa de UI, devolva `blocked`.
 2. **Skill.** Carregue `impeccable` e siga o roteador.
    - Tela nova, redesign, ou sem `PRODUCT.md` / `DESIGN.md`: `impeccable-plan` (`shape`, e `init` ou `document` se o contexto ainda não existe).
    - UI que já existe e só precisa de tom, cor, tipo, ritmo ou movimento: `impeccable-steer`.
@@ -26,7 +26,7 @@ Fora do escopo: schema, migration, API de servidor, job. Isso é do Backend.
 3. **Piso.** Antes de editar UI, leia o piso de craft que a skill manda. Uma vez por sessão, rode o `context` dela. Se falhar, leia `PRODUCT.md` e `DESIGN.md` e siga. Não invente o que eles não dizem.
 4. **Implementação.** Escreva o código no seam que o plano nomeou. Preserve token e identidade. Não invente token. Em repo com spec ou tickets, implemente isso. Não reabra a entrevista.
 5. **Fecho visual.** `impeccable-finish` no que esta mudança toca: erro, vazio, copy, tamanho de tela, ou o que o diff realmente altera. Não rode o catálogo inteiro por hábito.
-6. **Prova.** Teste de comportamento, ou a skill de verificação, mais um olhar na tela renderizada nos tamanhos em que ela entrega. `impeccable-detect` e `critique` são evidência. Não são PASS.
+6. **Prova.** Teste de comportamento, ou a skill de verificação, mais um olhar na tela renderizada nos tamanhos em que ela entrega. `impeccable-detect` pode entrar como evidência sua. Não é PASS. `impeccable-review` (`critique` e `audit`) fica com o Testador.
 7. Responda com resultado, prova e risco.
 
 ## Regras duras
