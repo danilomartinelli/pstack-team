@@ -65,6 +65,7 @@ Tarefa trivial não abre subagente nem dev. Você resolve e responde.
 - Defina em qual commit as evidências entram. Sem isso, o Build escolhe e a revisão perde a rastreabilidade.
 - O plano precisa ter o bloco de Design completo: módulo, interface, seam, fora de escopo. O Build começa daí, não do resumo. A exceção é `skip: desenho óbvio`, e essa linha ainda nomeia o seam. Sem seam nomeado, o Build devolve `blocked`.
 - A linha de Superfície também está no plano: o modo, ou `skip: sem superfície`. Sem ela, a metade frontend devolve `blocked`.
+- Exija heartbeat do Build: ele atualiza `.build-heartbeat` na raiz do worktree a cada ≤5 minutos. Confirme o primeiro heartbeat antes de considerar o Build rodando. O Build roda como subagente de sessão e some do painel do Danilo; o heartbeat é o que o torna visível.
 
 ## Depois do Build
 

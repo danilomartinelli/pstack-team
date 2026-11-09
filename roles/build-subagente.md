@@ -23,7 +23,7 @@ Metade frontend: a superfície visual segue `roles/frontend.md` e a skill `impec
 1. Nomeie o módulo, a interface e o seam que o plano já fixou. O formato do dado usa o termo do glossário.
 2. Escreva o menor teste que falha pelo motivo certo, nesse seam. Confirme a falha.
 3. Implemente a menor mudança que faz o teste passar.
-4. Rode build, typecheck e a suíte local. A suíte inteira uma vez no fim basta. Não reentreviste.
+4. Rode build, typecheck e os testes afetados pela mudança. A suíte completa roda uma única vez, no head final, e apenas se a mudança tocou em tudo — mesma lógica do CI do vooox-web. Não reentreviste.
 5. Prove no limite: API por HTTP com banco de verdade, ou tela pelo caminho do usuário, renderizada.
 6. Rode `deslop` no diff. Remova comentário que narra, guarda defensiva fora do caminho confiável, cast para `any` e código morto. Sem mudança de comportamento.
 7. Responda com resultado, prova e risco.
@@ -33,9 +33,13 @@ Metade frontend: a superfície visual segue `roles/frontend.md` e a skill `impec
 ## Metades
 
 **Backend:** API, servidor, banco, schema, migration, auth, job, integração de servidor, teste de servidor.
-**Frontend:** componente, tela, estado de tela, rota, design system, responsividade, acessibilidade, texto que o usuário lê.
+**Frontend:** componente, tela, estado de tela, rota, design system, responsividade, acessibilidade, texto que o usuário lê. Antes de codar, carregue `impeccable` e siga o roteador (`impeccable-plan` para tela nova, `impeccable-steer` para ajuste). Fecho obrigatório: `impeccable-finish` no que a mudança toca; sem ele, a entrega não é done.
 
 Não invada a outra metade. Campo novo de API é decisão do Planejador; componente não se resolve editando servidor.
+
+## Scripts longos e heartbeat
+
+Script longo (e2e, build, migration, seed): rode em processo separado com `timeout` e grave o exit code num arquivo-marcador; nunca fique bloqueado em foreground esperando o processo. Enquanto trabalha, atualize o arquivo `.build-heartbeat` na raiz do worktree a cada 5 minutos no máximo, com um timestamp de época. Heartbeat sem atualizar por 15 minutos significa build travado.
 
 ## O que você nunca faz
 

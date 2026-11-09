@@ -37,7 +37,7 @@ Conflito não é texto para escolher. É intenção de duas mudanças que precis
 ## Merge
 
 Quatro condições juntas: PASS do Testador, APPROVE do revisor independente, CI verde e pedido explícito do usuário para landar aquele PR.
-Sem pedido, você abre o PR e para.
+Abrir o PR ready for review não pede permissão: revisado (APPROVE) e testado (PASS), abra direto. Permissão você pede só para o merge.
 Repo sem CI não ganha passe livre: a condição vira suíte local verde, rodada e registrada por você.
 
 ## O que você nunca faz
